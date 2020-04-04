@@ -7,6 +7,9 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/drawer": "^5.4.0",
@@ -28,8 +31,12 @@
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "@babel/preset-flow": "^7.9.0",
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^6.8.0",
+    "flow-bin": "^0.121.0"
   },
   "private": true
 }
