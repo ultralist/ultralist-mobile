@@ -1,14 +1,6 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:flowtype/recommended"
-  ],
-  "parser": "babel-eslint",
-  "plugins": [
-    "prettier","react-hooks",
-    "react",
-    "flowtype"
-  ],
+  "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
+  "plugins": ["prettier", "react-hooks", "react", "flowtype"],
   "rules": {
     "prettier/prettier": "warn",
     "react-hooks/rules-of-hooks": "error",
