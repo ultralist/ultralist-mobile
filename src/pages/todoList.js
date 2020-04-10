@@ -3,7 +3,9 @@
 import * as React from "react"
 
 import { View, ScrollView, StyleSheet } from "react-native"
-import { Appbar, Text, List, Checkbox, Title, Chip } from "react-native-paper"
+import { List, Checkbox, Title, Chip } from "react-native-paper"
+
+import FakeStorage from "../shared/backend/fakeStorage"
 
 const ListLeft = () => {
   return (
@@ -14,6 +16,21 @@ const ListLeft = () => {
 }
 
 const TodoList = () => {
+  const storage = new FakeStorage()
+  const todoList = storage.loadTodoLists()[0]
+
+  const onAddTodoItem = () => {
+    storage.updateTodoList(todoList)
+  }
+
+  const onChangeTodoItem = () => {
+    storage.updateTodoList(todoList)
+  }
+
+  const onDeleteTodoItem = () => {
+    storage.updateTodoList(todoList)
+  }
+
   return (
     <React.Fragment>
       <Title style={styles.listTitle}>Work list</Title>
@@ -22,21 +39,28 @@ const TodoList = () => {
         <Chip onClose={() => {}}>not:archived</Chip>
       </View>
 
+      <TodoList
+        todoList={todoList}
+        onAddTodoItem={onAddTodoItem}
+        onChangeTodoItem={onChangeTodoItem}
+        onDeleteTodoItem={onDeleteTodoItem}
+      />
+
       <ScrollView style={{ paddingBottom: 100 }}>
         <List.Subheader>All items</List.Subheader>
         <List.Section style={styles.listSection}>
           <List.Item
-            left={(props) => <ListLeft />}
+            left={() => <ListLeft />}
             title="List item"
             description="List descriptionnnn"
           />
           <List.Item
-            left={(props) => <ListLeft />}
+            left={() => <ListLeft />}
             title="List item"
             description="List description"
           />
           <List.Item
-            left={(props) => <ListLeft />}
+            left={() => <ListLeft />}
             title="List item"
             description="List description"
           />

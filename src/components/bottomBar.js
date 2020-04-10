@@ -36,33 +36,33 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     left: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   leftButtons: {
     flex: 1,
     flexGrow: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   rightButton: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    flex: 1
+    flex: 1,
   },
   button: {
-    color: "#fff"
+    color: "#fff",
   },
   fabHolder: {
     position: "absolute",
     bottom: 30,
-    width: "100%"
+    width: "100%",
   },
   fab: {
     flex: 1,
     alignItems: "center",
     left: 0,
     right: 0,
-    bottom: 0
-  }
+    bottom: 0,
+  },
 })
 
 export default BottomBar

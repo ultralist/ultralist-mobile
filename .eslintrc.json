@@ -5,7 +5,6 @@
     "prettier/prettier": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "no-unrestricted-globals": "warn"
+    "react/jsx-uses-vars": "error"
   }
 }
