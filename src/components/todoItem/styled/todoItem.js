@@ -42,52 +42,52 @@ type Props = {
     notesArea: string,
     paper: string,
     listItem: string,
-    selectedListItem: string
-  }
+    selectedListItem: string,
+  },
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   shortWidthHide: {
     [theme.breakpoints.down(700 + theme.spacing.unit * 3 * 2)]: {
-      display: "none"
+      display: "none",
     },
     [theme.breakpoints.up(700 + theme.spacing.unit * 3 * 2)]: {
-      display: "block"
-    }
+      display: "block",
+    },
   },
   shortWidthShow: {
     [theme.breakpoints.down(700 + theme.spacing.unit * 3 * 2)]: {
-      display: "block"
+      display: "block",
     },
     [theme.breakpoints.up(700 + theme.spacing.unit * 3 * 2)]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   todo: {
     [theme.breakpoints.down(700 + theme.spacing.unit * 3 * 2)]: {},
     [theme.breakpoints.up(700 + theme.spacing.unit * 3 * 2)]: {
-      maxWidth: 1200
+      maxWidth: 1200,
     },
     color: "#444",
     backgroundColor: "#fff",
-    borderTop: "1px solid #eee"
+    borderTop: "1px solid #eee",
   },
   firstTodo: {
     [theme.breakpoints.down(700 + theme.spacing.unit * 3 * 2)]: {},
     [theme.breakpoints.up(700 + theme.spacing.unit * 3 * 2)]: {
-      maxWidth: 1200
+      maxWidth: 1200,
     },
     color: "#444",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   starIcon: {
-    color: yellow[800]
+    color: yellow[800],
   },
   notesArea: {
     backgroundColor: "#efefef",
     marginLeft: 40,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 })
 
 const TodoItem = (props: Props) => {
@@ -115,7 +115,7 @@ const TodoItem = (props: Props) => {
     onChangeTodo(todoItem)
   }
 
-  const deleteNote = note => {
+  const deleteNote = (note) => {
     todoItem.deleteNote(note)
     onChangeTodo(todoItem)
   }
@@ -129,26 +129,26 @@ const TodoItem = (props: Props) => {
     setShowNotes(!showNotes)
   }
 
-  const onChangeTodo = todoItem => {
+  const onChangeTodo = (todoItem) => {
     setTodoItemAttrs(todoItem.toJSON())
     props.onChange(todoItem)
   }
 
   const notes = () => {
-    return todoItem.notes.map(n => (
+    return todoItem.notes.map((n) => (
       <React.Fragment key={n}>
         <TodoItemNote note={n} onDeleteNote={deleteNote} />
       </React.Fragment>
     ))
   }
 
-  const ArchiveButton = props => (
+  const ArchiveButton = (props) => (
     <IconButton onClick={props.onClick}>
       <ArchiveIcon />
     </IconButton>
   )
 
-  const UnarchiveButton = props => (
+  const UnarchiveButton = (props) => (
     <IconButton onClick={props.onClick}>
       <UnarchiveIcon />
     </IconButton>
@@ -170,7 +170,7 @@ const TodoItem = (props: Props) => {
     }
   }
 
-  const onKeypress = event => {
+  const onKeypress = (event) => {
     if (!props.isSelected || storage.isModalOpen()) return
 
     if (event.keyCode === 13) setShowEditTodo(true)
@@ -188,20 +188,58 @@ const TodoItem = (props: Props) => {
   }, [])
 
   return (
-    <ListItem key={todoItem.id} className={props.isFirst ? props.classes.firstTodo : props.classes.todo}>
-      <Checkbox tabIndex={-1} checked={todoItem.completed} onChange={toggleComplete} />
+    <ListItem
+      key={todoItem.id}
+      className={props.isFirst ? props.classes.firstTodo : props.classes.todo}
+    >
+      <Checkbox
+        tabIndex={-1}
+        checked={todoItem.completed}
+        onChange={toggleComplete}
+      />
 
-      <IconButton onClick={togglePriority} className={props.classes.shortWidthHide} aria-label="Prioritize">
-        {todoItem.isPriority ? <Star className={props.classes.starIcon} /> : <StarBorder />}
+      <IconButton
+        onClick={togglePriority}
+        className={props.classes.shortWidthHide}
+        aria-label="Prioritize"
+      >
+        {todoItem.isPriority ? (
+          <Star className={props.classes.starIcon} />
+        ) : (
+          <StarBorder />
+        )}
       </IconButton>
 
-      <ListItemText onClick={toggleShowEditTodo} primary={<TodoText bold={todoItem.isPriority} strike={todoItem.completed} grey={todoItem.archived} val={todoItem.subject} onClick={props.onSubjectClick} />} secondary={<DueDate grey={todoItem.archived || todoItem.completed} date={todoItem.dueDate()} />} />
+      <ListItemText
+        onClick={toggleShowEditTodo}
+        primary={
+          <TodoText
+            bold={todoItem.isPriority}
+            strike={todoItem.completed}
+            grey={todoItem.archived}
+            val={todoItem.subject}
+            onClick={props.onSubjectClick}
+          />
+        }
+        secondary={
+          <DueDate
+            grey={todoItem.archived || todoItem.completed}
+            date={todoItem.dueDate()}
+          />
+        }
+      />
 
       <Collapse in={showNotes} timeout="auto" unmountOnExit>
         <ul className={props.classes.notesArea}> {notes()} </ul>
       </Collapse>
 
-      <EditTodo show={showEditTodo} onClose={toggleShowEditTodo} todoItem={todoItem} onEditTodo={onChangeTodo} onDeleteTodo={props.onDelete} />
+      <EditTodo
+        show={showEditTodo}
+        onClose={toggleShowEditTodo}
+        todoItem={todoItem}
+        onEditTodo={onChangeTodo}
+        onDeleteTodo={props.onDelete}
+      />
       <ListItemSecondaryAction>
         <div className={props.classes.shortWidthHide}>
           {firstButton()}

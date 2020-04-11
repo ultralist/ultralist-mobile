@@ -1,15 +1,16 @@
 // @flow
 import React, { useState } from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
+import { Title } from "react-native-paper"
 
 import FakeStorage from "../../shared/backend/fakeStorage"
 
 import TodoItemModel from "../../shared/models/todoItem"
 import TodoListModel from "../../shared/models/todoList"
 import FilterModel from "../../shared/models/filter"
-import FilterChips from "./filterChips"
 
 import TodoGroup from "./todoGroup"
+import FilterChips from "./filterChips"
 
 type Props = {
   todoList: TodoListModel,
@@ -21,6 +22,12 @@ type Props = {
 const styles = StyleSheet.create({
   hidden: {
     display: "none",
+  },
+  listTitle: {
+    paddingTop: 20,
+    fontSize: 30,
+    margin: 20,
+    textAlign: "center",
   },
   toggleContainer: {
     height: 56,
@@ -44,18 +51,22 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   filterChips: {
-    display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
-    flexWrap: "wrap",
   },
 })
 
 const TodoList = (props: Props) => {
   const storage = new FakeStorage()
-  const filterModel = storage.loadFilter()
-  const [filterModelAttrs, setFilterModelAttrs] = useState({})
+  const currentFilter = storage.loadFilter()
+  console.log("load current filter", currentFilter)
+  const [_, setFilterModelAttrs] = useState(currentFilter.toJSON())
+  const groups = currentFilter.applyFilter(props.todoList.todos)
 
-  const groups = filterModel.applyFilter(props.todoList.todos)
+  const onAddTodo = (todo: TodoItemModel) => {
+    props.todoList.addTodo(todo)
+    props.onAddTodoItem(todo)
+  }
 
   const onChangeTodo = (todo: TodoItemModel) => {
     props.onChangeTodoItem(todo)
@@ -67,24 +78,25 @@ const TodoList = (props: Props) => {
     props.onDeleteTodoItem(todo)
   }
 
-  const onChangeFilter = (filter: FilterModel) => {
-    storage.saveFilter(filter)
-    setFilterModelAttrs(filter.toJSON())
+  const onChangeFilter = () => {
+    console.log("change filter", currentFilter)
+    storage.saveFilter(currentFilter)
+    setFilterModelAttrs(currentFilter.toJSON())
   }
 
   const onSubjectClick = (subject: string) => {
-    filterModel.addSubjectContains(subject)
-    onChangeFilter(filterModel)
+    currentFilter.addSubjectContains(subject)
+    onChangeFilter(currentFilter)
   }
 
   return (
     <React.Fragment>
       <View>
-        <Text style={styles.listName}>{props.todoList.name}</Text>
+        <Title style={styles.listTitle}>{props.todoList.name}</Title>
 
         <div className={styles.filterChips}>
           <FilterChips
-            currentFilter={filterModel}
+            currentFilter={currentFilter}
             onChangeFilter={onChangeFilter}
           />
         </div>

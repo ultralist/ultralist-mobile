@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Appbar } from "react-native-paper"
-import TodoList from "./pages/todoList"
+import TodoListPage from "./pages/todoList"
 
 import BottomBar from "./components/bottomBar"
 
@@ -13,7 +13,7 @@ const UltralistScreen = ({ navigation }) => (
       <Appbar.Content title="Ultralist" />
     </Appbar.Header>
 
-    <TodoList />
+    <TodoListPage />
 
     <BottomBar />
   </React.Fragment>
