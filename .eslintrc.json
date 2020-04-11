@@ -1,6 +1,9 @@
 {
   "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
   "plugins": ["prettier", "react-hooks", "react", "flowtype"],
+  "env": {
+    "browser": true
+  },
   "rules": {
     "prettier/prettier": "warn",
     "react-hooks/rules-of-hooks": "error",
