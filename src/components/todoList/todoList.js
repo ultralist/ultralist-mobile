@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { View, StyleSheet } from "react-native"
 import { Title } from "react-native-paper"
 
-import FakeStorage from "../../shared/backend/fakeStorage"
+import StorageContext from "../../storageContext"
 
 import TodoItemModel from "../../shared/models/todoItem"
 import TodoListModel from "../../shared/models/todoList"
@@ -57,9 +57,8 @@ const styles = StyleSheet.create({
 })
 
 const TodoList = (props: Props) => {
-  const storage = new FakeStorage()
-  const currentFilter = storage.loadFilter()
-  console.log("load current filter", currentFilter)
+  const storage = React.useContext(StorageContext)
+  const currentFilter = new FilterModel(storage.load("currentFilter") || {})
   const [_, setFilterModelAttrs] = useState(currentFilter.toJSON())
   const groups = currentFilter.applyFilter(props.todoList.todos)
 
@@ -79,14 +78,13 @@ const TodoList = (props: Props) => {
   }
 
   const onChangeFilter = () => {
-    console.log("change filter", currentFilter)
-    storage.saveFilter(currentFilter)
+    storage.save("currentFilter", currentFilter)
     setFilterModelAttrs(currentFilter.toJSON())
   }
 
   const onSubjectClick = (subject: string) => {
     currentFilter.addSubjectContains(subject)
-    onChangeFilter(currentFilter)
+    onChangeFilter()
   }
 
   return (

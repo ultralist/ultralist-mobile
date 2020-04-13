@@ -2,11 +2,12 @@
 
 import * as React from "react"
 
-import { View, ScrollView, StyleSheet } from "react-native"
-import { List, Checkbox, Title, Chip } from "react-native-paper"
+import { View, StyleSheet } from "react-native"
+import { Checkbox } from "react-native-paper"
 
 import TodoList from "../components/todoList/todoList"
-import FakeStorage from "../shared/backend/fakeStorage"
+import StorageContext from "../storageContext"
+import TodoListStorage from "../shared/backend/todoListStorage"
 
 const ListLeft = () => {
   return (
@@ -17,19 +18,19 @@ const ListLeft = () => {
 }
 
 const TodoListPage = () => {
-  const storage = new FakeStorage()
-  const todoList = storage.loadTodoLists()[0]
+  const todoListStorage = new TodoListStorage(React.useContext(StorageContext))
+  const todoList = todoListStorage.loadFirstTodoList()
 
   const onAddTodoItem = () => {
-    storage.updateTodoList(todoList)
+    todoListStorage.saveTodoList(todoList)
   }
 
   const onChangeTodoItem = () => {
-    storage.updateTodoList(todoList)
+    todoListStorage.saveTodoList(todoList)
   }
 
   const onDeleteTodoItem = () => {
-    storage.updateTodoList(todoList)
+    todoListStorage.saveTodoList(todoList)
   }
 
   return (

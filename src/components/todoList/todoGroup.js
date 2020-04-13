@@ -19,8 +19,8 @@ const TodoGroup = (props: Props) => {
     <React.Fragment>
       <List.Subheader style={styles.title}>{props.group.name}</List.Subheader>
       <List.Section style={styles.listSection}>
-        {todos.map((todo) => (
-          <Text>todo item</Text>
+        {todos.map((todo, idx) => (
+          <Text key={idx}>todo item</Text>
         ))}
       </List.Section>
     </React.Fragment>
