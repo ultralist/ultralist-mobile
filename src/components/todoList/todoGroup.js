@@ -1,7 +1,9 @@
 // @flow
 import React from "react"
 import { StyleSheet } from "react-native"
-import { List, Text } from "react-native-paper"
+import { List } from "react-native-paper"
+
+import TodoItem from "../todoItem/styled/todoItem"
 
 import TodoItemModel from "../../shared/models/todoItem"
 import TodoListGroup from "../../shared/models/todoListGroup"
@@ -20,7 +22,12 @@ const TodoGroup = (props: Props) => {
       <List.Subheader style={styles.title}>{props.group.name}</List.Subheader>
       <List.Section style={styles.listSection}>
         {todos.map((todo, idx) => (
-          <Text key={idx}>todo item</Text>
+          <TodoItem
+            todoItem={todo}
+            onChange={props.onChange}
+            onDelete={props.onDelete}
+            onSubjectClick={props.onSubjectClick}
+          />
         ))}
       </List.Section>
     </React.Fragment>
