@@ -55,10 +55,11 @@ const styles = StyleSheet.create({
   },
 })
 
-const ListLeft = () => {
+const ListLeft = (props: { todoItem: TodoItemModel, onPress: any }) => {
+  const status = props.todoItem.completed ? "checked" : "unchecked"
   return (
     <View style={styles.listItemLeft}>
-      <Checkbox status="unchecked" />
+      <Checkbox status={status} onPress={props.onPress} />
     </View>
   )
 }
@@ -76,7 +77,7 @@ const TodoItem = (props: Props) => {
     setShowEditTodo(!showEditTodo)
   }
 
-  const toggleComplete = () => {
+  const onToggleComplete = () => {
     todoItem.toggleCompleted()
     onChangeTodo(todoItem)
   }
@@ -155,9 +156,10 @@ const TodoItem = (props: Props) => {
 
   return (
     <List.Item
-      left={() => <ListLeft />}
+      left={() => <ListLeft todoItem={todoItem} onPress={onToggleComplete} />}
       key={todoItem.id}
       title={subject}
+      onClick={() => console.log("todo click")}
       description={due}
     />
   )
