@@ -8,7 +8,7 @@ import StorageContext from "../../../storageContext"
 
 import TodoItemModel from "../../../shared/models/todoItem"
 
-// import DueDate from "./dueDate"
+import DueDate from "../basic/dueDate"
 import TodoText from "../basic/todoText"
 // import SetDueButton from "./setDueButton"
 // import TodoItemNote from "./todoItemNote"
@@ -151,8 +151,15 @@ const TodoItem = (props: Props) => {
     />
   )
 
+  const due = <DueDate todoItem={todoItem} />
+
   return (
-    <List.Item left={() => <ListLeft />} key={todoItem.id} title={subject} />
+    <List.Item
+      left={() => <ListLeft />}
+      key={todoItem.id}
+      title={subject}
+      description={due}
+    />
   )
 }
 
