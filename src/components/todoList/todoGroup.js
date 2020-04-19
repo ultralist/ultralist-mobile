@@ -23,6 +23,7 @@ const TodoGroup = (props: Props) => {
       <List.Section style={styles.listSection}>
         {todos.map((todo, idx) => (
           <TodoItem
+            key={todo.uuid}
             todoItem={todo}
             onChange={props.onChange}
             onDelete={props.onDelete}

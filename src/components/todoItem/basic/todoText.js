@@ -24,10 +24,9 @@ const TodoText = (props: Props) => {
   const parsedWords = words.map((word, i) => {
     if (isContext(word)) {
       return (
-        <React.Fragment>
+        <React.Fragment key={i}>
           <Text
             style={styles.context}
-            key={i}
             onPress={() => props.onClick(word.trim())}
           >
             {word}
@@ -37,10 +36,9 @@ const TodoText = (props: Props) => {
       )
     } else if (isProject(word)) {
       return (
-        <React.Fragment>
+        <React.Fragment key={i}>
           <Text
             style={styles.project}
-            key={i}
             onPress={() => props.onClick(word.trim())}
           >
             {word}

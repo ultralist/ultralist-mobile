@@ -31,7 +31,6 @@ const DueDate = (props: Props) => {
   if (props.todoItem.due === null) return null
   const todoItem = props.todoItem
 
-  console.log("todoItem.due = ", todoItem.due)
   const formattedDate = format(parseISO(todoItem.due), "MMM do")
   const realDate = toDate(parseISO(todoItem.due))
   const isDone = todoItem.archived || todoItem.completed
