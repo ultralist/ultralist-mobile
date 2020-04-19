@@ -1,20 +1,13 @@
 // @flow
 import React from "react"
-import { Text } from "react-native"
+import { Text, StyleSheet } from "react-native"
 
 type Props = {
   val: string,
-  strike: boolean,
-  grey: boolean,
   bold: boolean,
+  grey: boolean,
+  strike: boolean,
   onClick: (str: string) => void,
-  classes: {
-    project: string,
-    context: string,
-    strike: string,
-    grey: string,
-    bold: string,
-  },
 }
 
 const isProject = (word) => {
@@ -32,7 +25,11 @@ const TodoText = (props: Props) => {
     if (isContext(word)) {
       return (
         <React.Fragment>
-          <Text key={i} onPress={() => props.onClick(word.trim())}>
+          <Text
+            style={styles.context}
+            key={i}
+            onPress={() => props.onClick(word.trim())}
+          >
             {word}
           </Text>
           <Text> </Text>
@@ -41,7 +38,11 @@ const TodoText = (props: Props) => {
     } else if (isProject(word)) {
       return (
         <React.Fragment>
-          <Text key={i} onPress={() => props.onClick(word.trim())}>
+          <Text
+            style={styles.project}
+            key={i}
+            onPress={() => props.onClick(word.trim())}
+          >
             {word}
           </Text>
           <Text>&nbsp;</Text>
@@ -52,12 +53,31 @@ const TodoText = (props: Props) => {
     }
   })
 
-  const classNames = []
-  if (props.strike) classNames.push(props.classes.strike)
-  if (props.grey) classNames.push(props.classes.grey)
-  if (props.bold) classNames.push(props.classes.bold)
+  const textStyles = []
+  if (props.bold) textStyles.push(styles.bold)
+  if (props.strike) textStyles.push(styles.strike)
+  if (props.grey) textStyles.push(styles.grey)
+  const finalStyle = StyleSheet.flatten(textStyles)
 
-  return <Text>{parsedWords}</Text>
+  return <Text style={finalStyle}>{parsedWords}</Text>
 }
+
+const styles = StyleSheet.create({
+  context: {
+    color: "#1E88E5",
+  },
+  project: {
+    color: "#E53935",
+  },
+  strike: {
+    textDecorationLine: "line-through",
+  },
+  grey: {
+    color: "#aaa",
+  },
+  bold: {
+    fontWeight: "bold",
+  },
+})
 
 export default TodoText

@@ -9,7 +9,7 @@ import StorageContext from "../../../storageContext"
 import TodoItemModel from "../../../shared/models/todoItem"
 
 // import DueDate from "./dueDate"
-// import TodoText from "./todoText"
+import TodoText from "../basic/todoText"
 // import SetDueButton from "./setDueButton"
 // import TodoItemNote from "./todoItemNote"
 // import EditTodo from "./editTodo"
@@ -140,13 +140,19 @@ const TodoItem = (props: Props) => {
   //     }
   //   }
   // }
+  //
+  const subject = (
+    <TodoText
+      bold={todoItem.isPriority}
+      strike={todoItem.completed}
+      grey={todoItem.archived}
+      onClick={() => console.log("click")}
+      val={todoItem.subject}
+    />
+  )
 
   return (
-    <List.Item
-      left={() => <ListLeft />}
-      key={todoItem.id}
-      title={todoItem.subject}
-    />
+    <List.Item left={() => <ListLeft />} key={todoItem.id} title={subject} />
   )
 }
 
