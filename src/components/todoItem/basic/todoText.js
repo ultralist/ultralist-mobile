@@ -1,12 +1,10 @@
 // @flow
 import React from "react"
 import { Text, StyleSheet } from "react-native"
+import TodoItemModel from "../../../shared/models/todoItem"
 
 type Props = {
-  val: string,
-  bold: boolean,
-  grey: boolean,
-  strike: boolean,
+  todoItem: TodoItemModel,
   onClick: (str: string) => void,
 }
 
@@ -19,7 +17,8 @@ const isContext = (word) => {
 }
 
 const TodoText = (props: Props) => {
-  const words = props.val.split(" ")
+  const todoItem = props.todoItem
+  const words = todoItem.subject.split(" ")
 
   const parsedWords = words.map((word, i) => {
     if (isContext(word)) {
@@ -52,9 +51,9 @@ const TodoText = (props: Props) => {
   })
 
   const textStyles = []
-  if (props.bold) textStyles.push(styles.bold)
-  if (props.strike) textStyles.push(styles.strike)
-  if (props.grey) textStyles.push(styles.grey)
+  if (todoItem.isPriority) textStyles.push(styles.bold)
+  if (todoItem.completed) textStyles.push(styles.strike)
+  if (todoItem.archived) textStyles.push(styles.grey)
   const finalStyle = StyleSheet.flatten(textStyles)
 
   return <Text style={finalStyle}>{parsedWords}</Text>

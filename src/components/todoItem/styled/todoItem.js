@@ -143,13 +143,7 @@ const TodoItem = (props: Props) => {
   // }
   //
   const subject = (
-    <TodoText
-      bold={todoItem.isPriority}
-      strike={todoItem.completed}
-      grey={todoItem.archived}
-      onClick={() => console.log("click")}
-      val={todoItem.subject}
-    />
+    <TodoText todoItem={todoItem} onClick={props.onSubjectClick} />
   )
 
   const due = <DueDate todoItem={todoItem} />
