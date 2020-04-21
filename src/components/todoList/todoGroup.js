@@ -3,7 +3,7 @@ import React from "react"
 import { StyleSheet } from "react-native"
 import { List } from "react-native-paper"
 
-import TodoItem from "../todoItem/styled/todoItem"
+import TodoItem from "../todoItem/todoItem"
 
 import TodoItemModel from "../../shared/models/todoItem"
 import TodoListGroup from "../../shared/models/todoListGroup"

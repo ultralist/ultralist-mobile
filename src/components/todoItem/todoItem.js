@@ -4,12 +4,12 @@ import React, { useState } from "react"
 import { View, StyleSheet } from "react-native"
 import { Checkbox, List } from "react-native-paper"
 
-import StorageContext from "../../../storageContext"
+import StorageContext from "../../storageContext"
 
-import TodoItemModel from "../../../shared/models/todoItem"
+import TodoItemModel from "../../shared/models/todoItem"
 
-import DueDate from "../basic/dueDate"
-import TodoText from "../basic/todoText"
+import DueDate from "./dueDate"
+import TodoText from "./todoText"
 // import SetDueButton from "./setDueButton"
 // import TodoItemNote from "./todoItemNote"
 // import EditTodo from "./editTodo"

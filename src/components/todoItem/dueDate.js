@@ -1,7 +1,6 @@
 // @flow
 import React from "react"
 import { Text, StyleSheet } from "react-native"
-import TodoItemModel from "../../../shared/models/todoItem"
 import {
   format,
   isSameDay,
@@ -10,6 +9,8 @@ import {
   isBefore,
   parseISO,
 } from "date-fns"
+
+import TodoItemModel from "../../shared/models/todoItem"
 
 type Props = {
   todoItem: TodoItemModel,
