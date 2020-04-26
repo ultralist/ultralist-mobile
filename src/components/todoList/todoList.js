@@ -92,12 +92,12 @@ const TodoList = (props: Props) => {
       <View>
         <Title style={styles.listTitle}>{props.todoList.name}</Title>
 
-        <div className={styles.filterChips}>
+        <View className={styles.filterChips}>
           <FilterChips
             currentFilter={currentFilter}
             onChangeFilter={onChangeFilter}
           />
-        </div>
+        </View>
 
         {groups.map((g) => (
           <TodoGroup

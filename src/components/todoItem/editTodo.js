@@ -1,10 +1,10 @@
 // @flow
 import React from "react"
 
-import Dialog from "@material-ui/core/Dialog"
+import { Dialog, Portal } from "react-native-paper"
 
-import TodoItemModel from "../../../models/todoItem"
-import TodoForm from "../../todoItem/styled/todoForm"
+import TodoItemModel from "../../shared/models/todoItem"
+import TodoForm from "./todoForm"
 
 type Props = {
   todoItem: TodoItemModel,
@@ -26,15 +26,22 @@ const EditTodo = (props: Props) => {
   }
 
   return (
-    <Dialog fullWidth maxWidth="sm" open={props.show} onClose={props.onClose}>
-      <TodoForm
-        title="Edit todo"
-        todoItem={props.todoItem}
-        onChange={onChange}
-        onDelete={onDelete}
-        onClose={props.onClose}
-      />
-    </Dialog>
+    <Portal>
+      <Dialog
+        fullWidth
+        maxWidth="sm"
+        visible={props.show}
+        onDismiss={props.onClose}
+      >
+        <TodoForm
+          title="Edit todo"
+          todoItem={props.todoItem}
+          onChange={onChange}
+          onDelete={onDelete}
+          onClose={props.onClose}
+        />
+      </Dialog>
+    </Portal>
   )
 }
 

@@ -12,7 +12,7 @@ import DueDate from "./dueDate"
 import TodoText from "./todoText"
 // import SetDueButton from "./setDueButton"
 // import TodoItemNote from "./todoItemNote"
-// import EditTodo from "./editTodo"
+import EditTodo from "./editTodo"
 
 type Props = {
   todoItem: TodoItemModel,
@@ -149,13 +149,22 @@ const TodoItem = (props: Props) => {
   const due = <DueDate todoItem={todoItem} />
 
   return (
-    <List.Item
-      left={() => <ListLeft todoItem={todoItem} onPress={onToggleComplete} />}
-      key={todoItem.id}
-      title={subject}
-      onClick={() => console.log("todo click")}
-      description={due}
-    />
+    <React.Fragment>
+      <List.Item
+        left={() => <ListLeft todoItem={todoItem} onPress={onToggleComplete} />}
+        key={todoItem.id}
+        title={subject}
+        onClick={toggleShowEditTodo}
+        description={due}
+      />
+      <EditTodo
+        show={showEditTodo}
+        onClose={toggleShowEditTodo}
+        todoItem={todoItem}
+        onEditTodo={onChangeTodo}
+        onDeleteTodo={props.onDelete}
+      />
+    </React.Fragment>
   )
 }
 
